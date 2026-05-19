@@ -6,7 +6,6 @@ import { createProjectSchema } from '../validations/project.validation';
 
 const router = Router();
 
-// Apply auth protection globally to all project routes
 router.use(protect);
 
 router.post('/', restrictTo('ADMIN'), validate(createProjectSchema), createProject);

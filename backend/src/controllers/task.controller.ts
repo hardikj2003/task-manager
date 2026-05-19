@@ -2,7 +2,6 @@ import { Response } from "express";
 import { AuthenticatedRequest } from "../middleware/auth";
 import { prisma } from "../config/db";
 
-// Create Task (Admin Only)
 export const createTask = async (
   req: AuthenticatedRequest,
   res: Response,
@@ -26,7 +25,6 @@ export const createTask = async (
   }
 };
 
-// Update Task Status (Admin or Assigned Member Only)
 export const updateTaskStatus = async (
   req: AuthenticatedRequest,
   res: Response,
@@ -63,7 +61,7 @@ export const updateTaskStatus = async (
   }
 };
 
-// Get Dashboard Insights & Metrics
+
 export const getDashboardStats = async (
   req: AuthenticatedRequest,
   res: Response,
@@ -106,7 +104,7 @@ export const getDashboardStats = async (
   }
 };
 
-// Get all raw tasks based on roles
+
 export const getTasks = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const userId = req.user?.id;
@@ -114,7 +112,6 @@ export const getTasks = async (req: AuthenticatedRequest, res: Response): Promis
 
     let tasks;
 
-    // Admins see everything, Members see only tasks assigned to them
     if (userRole === 'ADMIN') {
       tasks = await prisma.task.findMany({
         orderBy: { createdAt: 'desc' }

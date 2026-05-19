@@ -10,7 +10,6 @@ dotenv.config();
 const app: Application = express();
 const PORT = process.env.PORT || 8080;
 
-// 🔒 CLEAN PRODUCTION CORS IMPLEMENTATION
 const allowedOrigins = [
   "http://localhost:3000", 
   "https://mindful-joy-production-de1f.up.railway.app",
@@ -19,7 +18,6 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl requests, or postman)
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.indexOf(origin) !== -1) {
@@ -38,10 +36,8 @@ app.use(
   }),
 );
 
-// Express built-in parser middleware MUST come after CORS
 app.use(express.json());
 
-// Main Domain Feature Middlewares
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
@@ -53,7 +49,7 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 app.listen(Number(PORT), "0.0.0.0", () => {
-  console.log(`🚀 API backend running smoothly on port ${PORT}`);
+  console.log(`API backend running smoothly on port ${PORT}`);
 });
 
 export default app;

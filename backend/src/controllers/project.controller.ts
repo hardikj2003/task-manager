@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { AuthenticatedRequest } from '../middleware/auth';
 import { prisma } from '../config/db';
 
-// Create a new project (Admin Only)
 export const createProject = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const { name, description, memberIds } = req.body;
@@ -28,7 +27,6 @@ export const createProject = async (req: AuthenticatedRequest, res: Response): P
   }
 };
 
-// Get all projects (Admins see everything, Members see only assigned projects)
 export const getProjects = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const userId = req.user?.id;
