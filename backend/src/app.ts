@@ -25,8 +25,8 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`🚀 API backend running smoothly on http://localhost:${PORT}`);
+app.listen(Number(PORT), "0.0.0.0", () => {
+  console.log(`🚀 Production API server successfully listening on port ${PORT}`);
 });
 
 export default app;
